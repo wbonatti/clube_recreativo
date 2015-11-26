@@ -1,0 +1,203 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+/* #####    TAG PADRAO     ######*/
+header {
+	background: #333385;
+	height: 125px;
+}
+
+.include{
+	background: url("../CSS/images/adicionar.png");
+	height: 31px;
+	width: 30px;
+	display: inline-block;
+	cursor: pointer;
+	float: left;
+	margin-left: 14px;
+}
+
+.Editar{
+	background: url("../CSS/images/editar.png");
+	height: 24px;
+	width: 24px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.Excluir{
+	background: url("../CSS/images/excluir.png");
+	height: 23px;
+	width: 23px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+body{
+	background: #E6E6F0;
+}
+section#conteudo {
+	width: 900px;
+	min-height: 396px;
+	margin: 0 auto;
+	border-left: dotted 2px #CCC;
+	border-right: dotted 2px #CCC;
+	padding-top: 10px;
+	text-align: center;
+	background: #EEEEF4;
+}
+
+footer {
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	background: #000066;
+	color: #FFF;
+	font-size: 18px;
+	font-weight: bold;
+}
+/* #####    OUTRAS TAGS     ######*/
+header h1 {
+	text-align: center;	
+	font-size: 45px;
+	line-height: 125px;
+}
+
+header h1 a{
+	color: #FFF;
+	text-decoration: none;
+}
+
+nav ul li {
+	font-size: 22px;
+	height: 50px;
+	line-height: 50px;
+}
+/* #####    CLASSES     ######*/
+.negrito{
+	font-weight: bold;
+}
+/* #####    ID     ######*/
+#tabela{
+	margin-top: 30px;
+}
+
+
+.azul{
+	background: #111111;
+	border-radius: 20px;
+	width: 500px;
+	margin-left: 450px;
+	height: 300px;	
+	text-align: center;
+	margin-top: 53px;
+	margin-bottom: 53px;
+}
+
+.azul span{
+	color: white;
+	font-weight: bold;
+	padding-top: 150px;
+	font-family: cursive;
+	font-size: xx-large;
+	text-transform: uppercase;
+}
+
+aside {
+	width: 296px;
+	float: left;
+	border: solid 2px #CCC;
+}
+
+article span{
+	line-height: 24;
+}
+
+input[type="text"]{
+	height: 30px;
+	width: 180px;
+	padding-left: 7px;
+	font-size: 17px;
+	color: black;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+input[type="radio"]{
+	margin: 5px 5px 5px 28px
+}
+
+select{
+	background: white;
+	border-radius: 5px;
+	height: 35px;
+	width: 145px;
+}
+
+.botao{
+	text-transform: uppercase;
+}
+
+table{
+	text-align: center;
+}
+
+table th{
+	height: 45px;
+	color: white;
+	background: #000066;
+}
+
+table td{
+	font-weight: bold;
+}
+
+article{
+	margin-left: 300px;
+}
+
+#total, .unidade{
+	width: 110px !important;	
+}
+
+.quantidade{
+	width: 100px !important;
+}
+
+#valTotalDiv{
+	float:right;
+}
+
+.deletar_btn{
+	margin-top: 30px;
+}
+
+@media print{
+	
+	aside, .Editar, .Excluir, input[type="button"], input[type="reset"]{
+		display: none
+	}
+
+	header, footer, table tr td{
+		background: white;
+		color: black;
+	}
+	
+	table tr td, table tr th{
+		border: 1px solid black;
+	}
+	
+	h2{
+		margin-left: -150px;
+	}
+	
+	article{
+		margin-left: 150px !important;
+	}
+	
+	table tr td{
+		font-weight: normal;
+	}
+	
+}
