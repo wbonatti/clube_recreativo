@@ -10,7 +10,7 @@
 		<section id="conteudo">
 			<c:import url="aside.jsp"/>
 			<article>
-			<span>BEM VINDO AO SISTEMA DE CLUBE</span>
+			<span>SISTEMA DE CLUBE</span>
 			</article>
 
 		</section>

@@ -2,14 +2,15 @@
 	margin: 0px;
 	padding: 0px;
 }
+
 /* #####    TAG PADRAO     ######*/
 header {
-	background: #333385;
+	background: #2e3436;
 	height: 125px;
 }
 
 .include{
-	background: url("../CSS/images/adicionar.png");
+	background: url("../CSS/images/adicionar.png") no-repeat;
 	height: 31px;
 	width: 30px;
 	display: inline-block;
@@ -39,7 +40,7 @@ body{
 }
 section#conteudo {
 	width: 900px;
-	min-height: 396px;
+	min-height: 430px;
 	margin: 0 auto;
 	border-left: dotted 2px #CCC;
 	border-right: dotted 2px #CCC;
@@ -49,13 +50,15 @@ section#conteudo {
 }
 
 footer {
-	height: 100px;
+	width: 100%;
 	line-height: 100px;
 	text-align: center;
-	background: #000066;
+	background: #2e3436;
 	color: #FFF;
 	font-size: 18px;
 	font-weight: bold;
+	position: absolute;
+	bottom: 0;
 }
 /* #####    OUTRAS TAGS     ######*/
 header h1 {
@@ -146,7 +149,7 @@ table{
 table th{
 	height: 45px;
 	color: white;
-	background: #000066;
+	background: #2e3436;
 }
 
 table td{

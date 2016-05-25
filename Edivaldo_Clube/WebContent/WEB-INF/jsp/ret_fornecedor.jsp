@@ -12,7 +12,7 @@
 </tr>
 <c:forEach var="forn" items="${fornecedor}" varStatus="id">
 
-<tr bgcolor="#${id.count %2!=0? '9999CC':'C2C2E0' }">
+<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
 	<td>${forn.nome}</td>
 	<td>${forn.cnpj}</td>
 	<td>${forn.fone}</td>

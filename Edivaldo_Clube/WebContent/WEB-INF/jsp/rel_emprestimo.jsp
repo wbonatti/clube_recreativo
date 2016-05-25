@@ -12,7 +12,7 @@
 </tr>
 <c:forEach var="empr" items="${Emprestimo}" varStatus="id">
 
-<tr bgcolor="#${id.count %2!=0? '9999CC':'C2C2E0' }">
+<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c'' }">
 	<td>${empr.nomeColaborador}</td>
 	<td>${empr.nomeSocio}</td>
 	<td><fmt:formatDate value="${empr.data.time}" pattern="dd/MM/yyyy"/></td>

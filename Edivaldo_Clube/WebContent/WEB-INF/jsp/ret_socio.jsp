@@ -13,7 +13,7 @@
 </tr>
 <c:forEach var="socios" items="${socio}" varStatus="id">
 
-<tr bgcolor="#${id.count %2!=0? '9999CC':'C2C2E0' }">
+<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
 	<c:choose>
 	<c:when test="${socios.tipo == 'T'}">
 		<td>Titular</td>

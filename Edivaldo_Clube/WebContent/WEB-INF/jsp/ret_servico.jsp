@@ -11,7 +11,7 @@
 </tr>
 <c:forEach var="servicos" items="${servico}" varStatus="id">
 
-<tr bgcolor="#${id.count %2!=0? '9999CC':'C2C2E0' }">
+<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
 	<td>${servicos.nome}</td>
 	<td>${servicos.valor}</td>
 	<td onclick="javascript:prepara_edit_contato(${servicos.id})"><div title="Editar" class="Editar"></div></td>

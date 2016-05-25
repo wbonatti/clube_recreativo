@@ -12,7 +12,7 @@
 </tr>
 <c:forEach var="atend" items="${atendimento}" varStatus="id">
 
-<tr bgcolor="#${id.count %2!=0? '9999CC':'C2C2E0' }">
+<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
 	<td><fmt:formatDate value="${atend.data.time}" pattern="dd/MM/yyyy"/></td>
 	<td>${atend.nomeColaborador}</td>
 	<td>${atend.nomeSocio}</td>

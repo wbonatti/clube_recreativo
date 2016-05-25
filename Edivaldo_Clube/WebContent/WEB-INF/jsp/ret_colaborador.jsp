@@ -12,7 +12,7 @@
 </tr>
 <c:forEach var="colab" items="${colaborador}" varStatus="id">
 
-<tr bgcolor="#${id.count %2!=0? '9999CC':'C2C2E0' }">
+<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
 	<td>${colab.nome}</td>
 	<td>${colab.cpf}</td>
 	<td>${colab.fone}</td>

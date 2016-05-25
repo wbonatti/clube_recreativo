@@ -34,3 +34,4 @@
 <li id="relatorio_venda">Venda</li>
 <li id="relatorio_reserva">Reserva</li>
 </ul>
+<li id="">Sair

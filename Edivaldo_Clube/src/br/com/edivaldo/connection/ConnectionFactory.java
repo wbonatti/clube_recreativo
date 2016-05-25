@@ -24,7 +24,7 @@ public class ConnectionFactory {
 	public static Connection getConnection() {
 	 try {
 		  connection = DriverManager.getConnection(
-		     		"jdbc:mysql://localhost:3306/edivaldo?" +
+		     		"jdbc:mysql://localhost:3306/clube?" +
 				"user=root&password=root");
 		} catch (SQLException e) {
 			e.printStackTrace();
