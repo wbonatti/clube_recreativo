@@ -98,6 +98,20 @@ nav ul li {
 	margin-bottom: 53px;
 }
 
+.gray{
+	background: #d3d7cf;
+	border-radius: 20px;
+	width: 500px;
+	margin-left: 450px;
+	height: 250px;	
+	text-align: center;
+	margin-top: 53px;
+	margin-bottom: 53px;
+	font-weight: bold;
+	font: large;
+	padding-top: 30px;
+}
+
 .azul span{
 	color: white;
 	font-weight: bold;
@@ -117,7 +131,7 @@ article span{
 	line-height: 24;
 }
 
-input[type="text"]{
+input[type="text"], input[type="password"]{
 	height: 30px;
 	width: 180px;
 	padding-left: 7px;

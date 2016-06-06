@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import br.com.edivaldo.connection.ConnectionFactory;
 
@@ -33,14 +35,21 @@ public class FiltroProblemas implements Filter{
 	
 		try {
 		
+			HttpServletRequest request = (HttpServletRequest) arg0;
+			HttpSession sessao =  request.getSession();
+			String usuario = (String) sessao.getAttribute("usuario");
+			
 		//verificar se esta logado 
-//			if(!logica.equals(antigo)){
+			if(logica.equals("FazerLogin") || usuario != null){
 				Connection conection = ConnectionFactory.getConnection();
 				arg0.setAttribute("connection", conection);
 				antigo= logica;
 				arg2.doFilter(arg0,arg1);
 				conection.close();
-//			}
+			}else{
+				arg0.getRequestDispatcher("/login.jsp").forward(arg0, arg1);
+			}
+			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
