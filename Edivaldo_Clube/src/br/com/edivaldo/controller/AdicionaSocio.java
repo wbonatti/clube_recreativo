@@ -12,36 +12,37 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.edivaldo.model.SocioDAO;
 import br.com.edivaldo.model.SocioVO;
 
-public class AdicionaSocio implements Logica{
-	
+public class AdicionaSocio implements Logica {
+
 	@Override
-	public String executa(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		SimpleDateFormat patern = new SimpleDateFormat("dd/MM/yyyy");
 
 		String nome = request.getParameter("nome");
-		String tipo = request.getParameter("tipo");
+		String tipo = request.getParameter("socio");
 		String endereco = request.getParameter("endereco");
 		String cpf = request.getParameter("cpf");
 		String fone = request.getParameter("fone");
 		String cep = request.getParameter("cep");
 		String rg = request.getParameter("rg");
-		int responsavel = request.getParameter("responsavel").isEmpty()? 0:Integer.parseInt(request.getParameter("responsavel")); 
-		Calendar dataExpira = Calendar.getInstance();
+		Integer responsavel = null;
+		if (request.getParameter("responsavel") != null) {
+			responsavel = request.getParameter("responsavel").isEmpty() ? 0
+					: Integer.parseInt(request.getParameter("responsavel"));
+		}
+		Calendar dataExpira = null;
 
-		if(!request.getParameter("expiracao").isEmpty()){
-		
-		try {
-			Date data = patern.parse(request.getParameter("expiracao"));
-			dataExpira.setTime(data);
-		} catch (ParseException e) {
-			return "/WEB-INF/jsp/cad_socio_err.jsp?nome="+nome+",desc="+e.getMessage();
-		}
-		}
-		else{
-			dataExpira.setTime(patern.parse("18/12/1993"));
-		}
+		if (request.getParameter("dataExpira") != null) {
+
+			try {
+				dataExpira = Calendar.getInstance();
+				Date data = patern.parse(request.getParameter("expiracao"));
+				dataExpira.setTime(data);
+			} catch (ParseException e) {
+				return "/WEB-INF/jsp/cad_socio_err.jsp?nome=" + nome + ",desc=" + e.getMessage();
+			}
+		} 
 		
 		SocioVO cliente = new SocioVO();
 		cliente.setNome(nome);
@@ -53,13 +54,13 @@ public class AdicionaSocio implements Logica{
 		cliente.setRg(rg);
 		cliente.setResponsavel(responsavel);
 		cliente.setDataExpiracao(dataExpira);
-		
-		Connection con = (Connection)request.getAttribute("connection");
+
+		Connection con = (Connection) request.getAttribute("connection");
 		SocioDAO dao = new SocioDAO(con);
-		
+
 		dao.setContato(cliente);
-		
-		return "/WEB-INF/jsp/cad_succ.jsp?logica=Socio&nome="+nome;
+
+		return "/WEB-INF/jsp/cad_succ.jsp?logica=Socio&nome=" + nome;
 	}
 
 }

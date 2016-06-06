@@ -13,7 +13,7 @@ public class SocioVO {
 	private String cep;
 	private String endereco;
 	private String rg;
-	private int responsavel;
+	private Integer responsavel;
 	private Calendar dataExpiracao;
 	
 	public int getId() {
@@ -64,10 +64,10 @@ public class SocioVO {
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public int getResponsavel() {
+	public Integer getResponsavel() {
 		return responsavel;
 	}
-	public void setResponsavel(int responsavel) {
+	public void setResponsavel(Integer responsavel) {
 		this.responsavel = responsavel;
 	}
 	public Calendar getDataExpiracao() {

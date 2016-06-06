@@ -26,20 +26,31 @@ public class SocioDAO {
 			// prepared statement para inserção
 			PreparedStatement stmt = con.prepareStatement(sql);
 			// seta os valores
-			stmt.setString(1,contato.getCep().isEmpty()?null:contato.getCep());
-			stmt.setString(2,contato.getCpf().isEmpty()?null:contato.getCpf());
-			stmt.setString(3,contato.getEndereco().isEmpty()?null:contato.getEndereco());
-			stmt.setDate(4, new Date(contato.getDataExpiracao().getTimeInMillis()));
+			stmt.setString(1,contato.getCep()== null?null:contato.getCep());
+			stmt.setString(2,contato.getCpf()== null?null:contato.getCpf());
+			stmt.setString(3,contato.getEndereco()== null?null:contato.getEndereco());
+			
+			if(contato.getDataExpiracao() != null){
+				stmt.setDate(4, new Date(contato.getDataExpiracao().getTimeInMillis()));
+			}else{
+				stmt.setNull(4, java.sql.Types.DATE);
+			}
+			
 			stmt.setString(5,contato.getFone());
 			stmt.setString(6,contato.getNome());
-			stmt.setInt(7,contato.getResponsavel());
-			stmt.setString(8,contato.getRg().isEmpty()?null:contato.getRg());
+			
+			if(contato.getResponsavel() !=null){
+				stmt.setLong(7,contato.getResponsavel());
+			}else{
+				stmt.setNull(7, java.sql.Types.INTEGER);
+			}
+			stmt.setString(8,contato.getRg()== null?null:contato.getRg());
 			stmt.setString(9,contato.getTipo());
 			// executa
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());;
+			System.out.println(e.getMessage());
 		}
 	}
 		public List<SocioVO> getTitulares(){

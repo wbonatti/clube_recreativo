@@ -33,14 +33,14 @@ public class FiltroProblemas implements Filter{
 	
 		try {
 		
-		
-			if(!logica.equals(antigo)){
+		//verificar se esta logado 
+//			if(!logica.equals(antigo)){
 				Connection conection = ConnectionFactory.getConnection();
 				arg0.setAttribute("connection", conection);
 				antigo= logica;
 				arg2.doFilter(arg0,arg1);
 				conection.close();
-			}
+//			}
 		
 		} catch (SQLException e) {
 			e.printStackTrace();

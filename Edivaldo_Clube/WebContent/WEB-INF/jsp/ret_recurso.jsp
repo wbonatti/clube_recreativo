@@ -51,4 +51,3 @@ function prepara_edit_contato(sociose){
 	});
 }
 </script>
-<script type="text/javascript" src="JS/meu_script_js.js"> </script>

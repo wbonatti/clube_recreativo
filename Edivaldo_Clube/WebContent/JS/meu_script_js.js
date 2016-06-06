@@ -25,26 +25,12 @@ jQuery(document).ready(function() {
 /*	--------------------------------------------------------------------------------------
 									CHAMA CADASTRO
 --------------------------------------------------------------------------------------*/
-	
-	$("#cad_socio_titular").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "CarregaAdicionaSocio"},
-		})
-		.done(function( msg ) {
-			$("article").html(msg);			
-		});
-	});
-		
+			
 	$("#cad_colaborador").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "cad_colaborador.jsp",
-		})
-		.done(function( msg ) {
-			$("article").html(msg);	
-		});
+		$("html").load("cad_colaborador.jsp", function(){
+			alert("ola");
+			
+		});	
 	});
 	
 	$("#cad_servicos").on("click",function(){
@@ -269,9 +255,9 @@ jQuery(document).ready(function() {
 											CADASTROS
 	--------------------------------------------------------------------------------------*/
 	
-	$("form input:radio").on("click", function(){
+	$("form input:radio").on("change", function(){
 		
-		if($("input#socioT:checked").val()?true:false){	
+		if($("input#socioT").is(":checked")){	
 			$("#cpf").prop( "disabled", false );
 			$("#cep").prop( "disabled", false );
 			$("#endereco").prop( "disabled", false );
@@ -292,38 +278,8 @@ jQuery(document).ready(function() {
 	});
 	
 	$("#CadastroSocio").on("click",function(){
-		var logicaO= recebeValCampo("logica");
-		var cepO= recebeValCampo("cep");
-		var cpfO= recebeValCampo("cpf");
-		var enderecoO= recebeValCampo("endereco");
-		var expiracaoO= recebeValCampo("dataExpira");
-		var foneO= recebeValCampo("fone");
-		var nomeO= recebeValCampo("nome");
-		var responsavelO= $("#resp option:selected").val();
-		var rgO= recebeValCampo("rg");
-		var tipoO= $("input:checked").val();
-				
-		if(tipoO=='T'){
-			responsavelO=0;
-			expiracaoO='';
-			rgO='';
-		}
-		else{
-			cepO='';
-			endereco='';
-			cpf='';
-		}
-		if(tipoO=='T'||tipoO=='D'){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: logicaO, cep: cepO, cpf: cpfO, endereco: enderecoO, expiracao: expiracaoO, fone: foneO, nome: nomeO, responsavel: responsavelO, rg: rgO, tipo: tipoO}
-			})
-		.done(function( msg ) {
-			$("#resposta_banco").html(msg).dialog();
-		});}else{
-			$("#resposta_banco").html("Preencha os campos corretamente!").dialog();
-		}
+		//valida os campos 
+		$("#formulario").submit();
 	});
 	
 	$("#CadastroColab").on("click",function(){

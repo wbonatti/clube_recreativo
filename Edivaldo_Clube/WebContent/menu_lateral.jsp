@@ -1,6 +1,6 @@
 <li>Cadastrar
 <ul>
-<li id="cad_socio_titular">S&oacute;cio</li>
+<li onclick="adicionaLogicaESubmita('CarregaAdicionaSocio')">S&oacute;cio</li>
 <li id="cad_colaborador">Colaborador</li>
 <li id="cad_servicos">Servi&ccedil;o</li>
 <li id="cad_produto">Produto</li>
@@ -35,3 +35,11 @@
 <li id="relatorio_reserva">Reserva</li>
 </ul>
 <li id="">Sair
+
+<script type="text/javascript">
+	//adiciona a logica e faz o submit no form
+	function adicionaLogicaESubmita(logica){
+		$("#logica").val(logica);
+		$("#formulario").submit();
+	};
+</script>
