@@ -17,8 +17,8 @@
 			<label>Senha:</label>
 			<input type="password" id="senha" name="senha">
 			<br><br><br>
-			<input type="reset" class="botao">
-			<input type="submit" class="botao">
+			<input type="reset" class="botao" value="Limpar">
+			<input type="submit" class="botao" value="Login">
 		</div>
 	</section>
 </form>

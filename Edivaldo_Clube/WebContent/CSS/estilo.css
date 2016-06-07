@@ -49,6 +49,10 @@ section#conteudo {
 	background: #EEEEF4;
 }
 
+section#conteudo table {
+	padding-left: 290px;
+}
+
 footer {
 	width: 100%;
 	line-height: 100px;
