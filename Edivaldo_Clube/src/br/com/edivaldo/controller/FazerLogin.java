@@ -13,13 +13,13 @@ public class FazerLogin implements Logica{
 		String user = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
 		
-		if(user.equalsIgnoreCase("wesley") && senha.equals("12345")){
+		if("wesley".equalsIgnoreCase(user) && "12345".equalsIgnoreCase(senha)){
 			sessao.setAttribute("usuario", user);
 		}else{
-			return "/login.jsp?erro=1";
+			return "login.jsp?erro=1";
 		}
 		
-		return "/inicio.jsp";
+		return "inicio.jsp";
 	}
 
 }

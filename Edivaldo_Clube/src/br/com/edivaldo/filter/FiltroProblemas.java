@@ -40,7 +40,7 @@ public class FiltroProblemas implements Filter{
 			String usuario = (String) sessao.getAttribute("usuario");
 			
 		//verificar se esta logado 
-			if(logica.equals("FazerLogin") || usuario != null){
+			if(usuario != null || "FazerLogin".equals(logica)){
 				Connection conection = ConnectionFactory.getConnection();
 				arg0.setAttribute("connection", conection);
 				antigo= logica;

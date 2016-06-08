@@ -11,6 +11,7 @@
 		<c:import url="/aside.jsp"/>
 		<form id="formulario" action="mvc" method="post">
 			<input type="text" hidden="hidden" id="logica" name="logica">
+			<input type="text" hidden="hidden" id="id" name="id">
 			<section id="conteudo">
 				<h2>Consulta Colaborador</h2>
 				<br><br>
@@ -28,8 +29,8 @@
 					<td>${colab.nome}</td>
 					<td>${colab.cpf}</td>
 					<td>${colab.fone}</td>
-					<td onclick="javascript:prepara_edit_contato(${colab.id})"><div title="Editar" class="Editar"></div></td>
-					<td onclick="javascript:prepara_rm_contato(${colab.id})"><div title="Excluir" class="Excluir"></div></td>
+					<td onclick="prepara_edit_contato(${colab.id}, 'CarregaAtualizaColaborador')"><div title="Editar" class="Editar"></div></td>
+					<td onclick="prepara_rm_contato(${colab.id}, 'RemoveColaborador')"><div title="Excluir" class="Excluir"></div></td>
 				</tr>
 				</c:forEach>
 				</table>
@@ -38,38 +39,6 @@
 		<div id="resposta_banco" title="Banco de Dados"></div>
 		<c:import url="/rodape.jsp"/>
 		
-		<script>
-		function prepara_rm_contato(idse){
-			$("#resp_banco").html('Deseja excluir o colaborador?').dialog({
-				width: 400,
-				buttons: [
-					{
-						text: "Sim",
-						click: function() {
-							$( this ).dialog( "close" );
-							$.post( "mvc", { id: idse, logica:"RemoveColaborador"}, function(data){
-								$("article").html(data);
-							});
-						}
-					},
-					{
-						text: "Cancelar",
-						click: function() {
-							$( this ).dialog( "close" );
-						}
-					}
-				]
-			});
-		}
-		
-		function prepara_edit_contato(sociose){
-			$.post( "mvc", { id: sociose, logica:"CarregaAtualizaColaborador" } )
-			.done(function(data){
-				$("article").html(data);
-			});
-		}
-		</script>
-
 	</body>
 </html>
 

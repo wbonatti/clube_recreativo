@@ -22,12 +22,12 @@ public class ColaboradorDAO {
 			// prepared statement para inserção
 			PreparedStatement stmt = con.prepareStatement(sql);
 			// seta os valores
-			stmt.setString(1,contato.getCep().isEmpty()?null:contato.getCep());
-			stmt.setString(2,contato.getCpf().isEmpty()?null:contato.getCpf());
-			stmt.setString(3,contato.getEndereco().isEmpty()?null:contato.getEndereco());
-			stmt.setString(4,contato.getFone().isEmpty()?null:contato.getFone());
-			stmt.setString(5,contato.getNome().isEmpty()?null:contato.getNome());
-			stmt.setString(6,contato.getRg().isEmpty()?null:contato.getRg());
+			stmt.setString(1,contato.getCep() == null ?null:contato.getCep());
+			stmt.setString(2,contato.getCpf() == null ?null:contato.getCpf());
+			stmt.setString(3,contato.getEndereco() == null ?null:contato.getEndereco());
+			stmt.setString(4,contato.getFone() == null ?null:contato.getFone());
+			stmt.setString(5,contato.getNome() == null ?null:contato.getNome());
+			stmt.setString(6,contato.getRg() == null ?null:contato.getRg());
 			// executa
 			stmt.execute();
 			stmt.close();

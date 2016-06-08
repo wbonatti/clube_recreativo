@@ -23,7 +23,7 @@ public class ServicosDAO {
 			// prepared statement para inserção
 			PreparedStatement stmt = con.prepareStatement(sql);
 			// seta os valores
-			stmt.setString(1,contato.getNome().isEmpty()?null:contato.getNome());
+			stmt.setString(1,contato.getNome() == null?null:contato.getNome());
 			stmt.setDouble(2,contato.getValor()==0?null:contato.getValor());
 			// executa
 			stmt.execute();

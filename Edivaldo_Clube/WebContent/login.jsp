@@ -16,13 +16,26 @@
 			<input type="text" id="usuario" name="usuario"><br><br>
 			<label>Senha:</label>
 			<input type="password" id="senha" name="senha">
-			<br><br><br>
+			<br>
+			<input type="text" id="loginError" hidden="hidden">
+			<br><br>
 			<input type="reset" class="botao" value="Limpar">
 			<input type="submit" class="botao" value="Login">
 		</div>
 	</section>
 </form>
 <c:import url="/rodape.jsp"></c:import>
+<script type="text/javascript">
+	
+	var error = location.search.split("erro=")[1];
+	switch (error) {
+		case "1":
+			$("#loginError").text("Usuário e/ou senha em branco.").show();
+			break;
+	}
+
+</script>
+
 
 </body>
 </html>

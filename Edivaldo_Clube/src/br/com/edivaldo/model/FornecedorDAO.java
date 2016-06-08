@@ -23,9 +23,9 @@ public class FornecedorDAO {
 			// prepared statement para inserção
 			PreparedStatement stmt = con.prepareStatement(sql);
 			// seta os valores
-			stmt.setString(1,contato.getNome().isEmpty()?null:contato.getNome());
-			stmt.setString(2,contato.getCnpj().isEmpty()?null:contato.getCnpj());
-			stmt.setString(3,contato.getFone().isEmpty()?null:contato.getFone());
+			stmt.setString(1,contato.getNome() == null?null:contato.getNome());
+			stmt.setString(2,contato.getCnpj() == null?null:contato.getCnpj());
+			stmt.setString(3,contato.getFone() == null?null:contato.getFone());
 			// executa
 			stmt.execute();
 			stmt.close();

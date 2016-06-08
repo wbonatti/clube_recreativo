@@ -16,7 +16,7 @@ public class AdicionaServicos implements Logica{
 
 		ServicosVO cliente = new ServicosVO();
 		
-		cliente.setNome(request.getParameter("nome"));
+		cliente.setNome(request.getParameter("descricao"));
 		String valor = request.getParameter("valor");
 		String arrey[]= new String[2];
 		arrey= valor.split(",");

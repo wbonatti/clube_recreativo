@@ -25,7 +25,40 @@ jQuery(document).ready(function() {
 /*	--------------------------------------------------------------------------------------
 										PESQUISAS
 --------------------------------------------------------------------------------------*/
-
+	submitaForm = function(){
+		$("#formulario").submit();
+	}
+	
+	prepara_rm_contato = function(idse, logica){ 
+		$("#resposta_banco").html('Deseja realmente excluir?').dialog({
+			width: 400,
+			buttons: [
+				{
+					text: "Sim",
+					click: function() {
+						$( this ).dialog( "close" );
+						$("#logica").val(logica);
+						$("#id").val(idse);
+						submitaForm();
+					}
+				},
+				{
+					text: "Cancelar",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]
+		});
+	}
+	
+	prepara_edit_contato =  function(id, logica){
+		$("#logica").val(logica);
+		$("#id").val(id);
+		submitaForm();
+	}
+	
+	
 	$("#registrar_compra").on("click",function(){
 		$.ajax({
 			type: "POST",
@@ -139,113 +172,32 @@ jQuery(document).ready(function() {
 	
 	$("#CadastroSocio").on("click",function(){
 		//valida os campos 
-		$("#formulario").submit();
+		submitaForm();
 	});
 	
 	$("#CadastroColab").on("click",function(){
-		var logicaO= recebeValCampo("logica");
-		var cepO= recebeValCampo("cep");
-		var cpfO= recebeValCampo("cpf");
-		var enderecoO= recebeValCampo("endereco");
-		var foneO= recebeValCampo("fone");
-		var nomeO= recebeValCampo("nome");
-		var rgO= recebeValCampo("rg");
-				
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: logicaO, cep: cepO, cpf: cpfO, endereco: enderecoO, fone: foneO, nome: nomeO, rg: rgO}
-			})
-		.done(function( msg ) {
-			$("#resposta_banco").html(msg).dialog();
-		});
+		submitaForm();
 	});
 	
 	$("#CadastroService").on("click",function(){
-		var logicaO= recebeValCampo("logica");
-		var descO= recebeValCampo("descricao");
-		var valO= recebeValCampo("valor");
-				
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: logicaO, nome: descO, valor: valO}
-			})
-		.done(function( msg ) {
-			$("#resposta_banco").html(msg).dialog();
-		});
+		submitaForm();
 	});
 	
 	$("#CadastroProduto").on("click",function(){
-		var logicaO= recebeValCampo("logica");
-		var descO= recebeValCampo("nome");
-		var compraO= recebeValCampo("compra");
-		var vendaO= recebeValCampo("venda");
-				
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: logicaO, nome: descO, compra: compraO, venda: vendaO}
-			})
-		.done(function( msg ) {
-			$("#resposta_banco").html(msg).dialog();
-		});
+		submitaForm();
 	});
 	
 	$("#CadastroRecurso").on("click",function(){
-		var logicaO= recebeValCampo("logica");
-		var descO= recebeValCampo("nome");
-		var valO= recebeValCampo("valor");
-				
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: logicaO, nome: descO, valor: valO}
-			})
-		.done(function( msg ) {
-			$("#resposta_banco").html(msg).dialog();
-		});
+		submitaForm();
 	});
 	
 	$("#CadastroAcervo").on("click", function(){
-		var logicaO= recebeValCampo("logica");
-		var descO= recebeValCampo("descricao");
-		var valO= recebeValCampo("valor");
-				
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: logicaO, descricao: descO, valor: valO}
-			})
-		.done(function( msg ) {
-			$("#resposta_banco").html(msg).dialog();
-		});
+		submitaForm();
 	});
 	
 	$("#CadastroFornecedor").on("click",function(){
-		var logicaO= recebeValCampo("logica");
-		var cnpjO= recebeValCampo("cnpj");
-		var foneO= recebeValCampo("fone");
-		var nomeO= recebeValCampo("nome");
-				
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: logicaO, cnpj: cnpjO, fone: foneO, nome: nomeO}
-			})
-		.done(function( msg ) {
-			$("#resposta_banco").html(msg).dialog();
-		});
+		submitaForm();
 	});
-	
-	function recebeValCampo(campo){
-		
-		if($("#"+campo).val()==''){
-			return null;
-		}else{
-			return $("#"+campo).val();
-		}
-	}
 	
 /*	--------------------------------------------------------------------------------------
 											Registrar

@@ -11,6 +11,7 @@
 		<c:import url="/aside.jsp"/>
 		<form id="formulario" action="mvc" method="post">
 			<input type="text" hidden="hidden" id="logica" name="logica">
+			<input type="text" hidden="hidden" id="id" name="id">
 			<section id="conteudo">
 				<h2>Consulta Socios</h2>
 				<br><br>
@@ -37,48 +38,16 @@
 					<td>${socios.nome}</td>
 					<td>${socios.fone}</td>
 					<td>${socios.endereco}</td>
-					<td onclick="javascript:prepara_edit_contato(${socios.id})"><div title="Editar" class="Editar"></div></td>
-					<td onclick="javascript:prepara_rm_contato(${socios.id})"><div title="Excluir" class="Excluir"></div></td>
+					<td onclick="prepara_edit_contato(${socios.id},'CarregaAtualizaSocio')"><div title="Editar" class="Editar"></div></td>
+					<td onclick="prepara_rm_contato(${socios.id},'RemoveSocio')"><div title="Excluir" class="Excluir"></div></td>
 				</tr>
 				</c:forEach>
 				</table>
 			</section>
 		</form>
-		<div id="resposta_banco" title="Banco de Dados"></div>
+		<div id="resposta_banco" title="Exclusão"></div>
 		<c:import url="/rodape.jsp"/>
 		
-		<script>
-		function prepara_rm_contato(idse){
-			$("#resp_banco").html('Deseja excluir o socio?').dialog({
-				width: 400,
-				buttons: [
-					{
-						text: "Sim",
-						click: function() {
-							$( this ).dialog( "close" );
-							$.post( "mvc", { id: idse, logica:"RemoveSocio"} , function(data){
-								$("article").html(data);
-							});
-						}
-					},
-					{
-						text: "Cancelar",
-						click: function() {
-							$( this ).dialog( "close" );
-						}
-					}
-				]
-			});
-		}
-		
-		function prepara_edit_contato(sociose){
-			$.post( "mvc", { id: sociose, logica:"CarregaAtualizaSocio" } )
-			.done(function(data){
-				$("article").html(data);
-			});
-		}
-		</script>
-
 	</body>
 </html>
 		
