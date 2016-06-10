@@ -17,7 +17,6 @@ jQuery(document).ready(function() {
 	$("#fone").inputmask('(99) 9999[9]-9999', {skipOptionalPartCharacter: "-", "clearIncomplete": true});
 	$(".botao").button();
 	$("#menu").menu();
-	$("table").css("margin-left",($("article").width()/2)-(($("table").width()+2)/2));
 	$(".valor").inputmask("[9]{7},99", { placeholder:" ", 'greedy' : false});
 	$(".inteiro").inputmask("9{15}",{placeholder:" ",clearMaskOnLostFocus: true});
 

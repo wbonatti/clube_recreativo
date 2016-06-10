@@ -2,6 +2,9 @@
 	margin: 0px;
 	padding: 0px;
 }
+body {
+	font-family: Arial;
+}
 
 /* #####    TAG PADRAO     ######*/
 header {
@@ -50,7 +53,7 @@ section#conteudo {
 }
 
 section#conteudo table {
-	padding-left: 290px;
+	width: 100%;
 }
 
 footer {
@@ -66,7 +69,7 @@ footer {
 }
 /* #####    OUTRAS TAGS     ######*/
 header h1 {
-	text-align: center;	
+	text-align: center;
 	font-size: 45px;
 	line-height: 125px;
 }
@@ -98,19 +101,16 @@ nav ul li {
 	margin-left: 450px;
 	height: 315px;	
 	text-align: center;
-	margin-top: 53px;
-	margin-bottom: 53px;
+	margin: 53px auto;
 }
 
 .gray{
 	background: #d3d7cf;
 	border-radius: 20px;
 	width: 500px;
-	margin-left: 450px;
+	margin: 53px auto;
 	height: 250px;	
 	text-align: center;
-	margin-top: 53px;
-	margin-bottom: 53px;
 	font-weight: bold;
 	font: large;
 	padding-top: 30px;
@@ -120,7 +120,6 @@ nav ul li {
 	color: white;
 	font-weight: bold;
 	padding-top: 150px;
-	font-family: cursive;
 	font-size: xx-large;
 	text-transform: uppercase;
 }
