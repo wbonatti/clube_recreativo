@@ -14,7 +14,7 @@
 </header>
 
 <div class="azul">
-	<span>Fatal Error<br><br> Contate o administrador!!<br><br>Para voltar &agrave; home <a href="index.jsp">clique aqui</a></span>
+	<span>Fatal Error<br><br> Contate o administrador!!<br><br>Para voltar &agrave; home <a href="inicio.jsp">clique aqui</a></span>
 </div>
 <c:import url="/rodape.jsp"></c:import>
 
