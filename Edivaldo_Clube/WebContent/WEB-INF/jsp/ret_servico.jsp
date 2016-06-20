@@ -15,6 +15,9 @@
 			<section id="conteudo">
 				<h2>Consulta Servicos</h2>
 				<br><br>
+				<label>Busca por nome:</label>
+				<input type="text" maxlength="15" class="filtroTela">
+				<br/><br/>
 				<table>
 				<tr>
 				<th>Nome</th>
@@ -25,7 +28,7 @@
 				<c:forEach var="servicos" items="${servico}" varStatus="id">
 				
 				<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
-					<td>${servicos.nome}</td>
+					<td class="nome">${servicos.nome}</td>
 					<td>${servicos.valor}</td>
 					<td onclick="prepara_edit_contato(${servicos.id}, 'CarregaAtualizaServico')"><div title="Editar" class="Editar"></div></td>
 					<td onclick="prepara_rm_contato(${servicos.id}, 'RemoveServico')"><div title="Excluir" class="Excluir"></div></td>

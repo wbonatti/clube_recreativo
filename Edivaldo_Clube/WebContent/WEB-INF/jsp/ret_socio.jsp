@@ -15,6 +15,9 @@
 			<section id="conteudo">
 				<h2>Consulta Socios</h2>
 				<br><br>
+				<label>Busca por nome:</label>
+				<input type="text" maxlength="15" class="filtroTela">
+				<br/><br/>
 				<table>
 				<tr>
 				<th>Socio</th>
@@ -35,7 +38,7 @@
 						<td>Dependente</td>
 					</c:otherwise>
 					</c:choose>
-					<td>${socios.nome}</td>
+					<td class="nome">${socios.nome}</td>
 					<td>${socios.fone}</td>
 					<td>${socios.endereco}</td>
 					<td onclick="prepara_edit_contato(${socios.id},'CarregaAtualizaSocio')"><div title="Editar" class="Editar"></div></td>

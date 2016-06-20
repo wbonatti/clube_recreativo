@@ -15,6 +15,9 @@
 			<section id="conteudo">
 				<h2>Consulta Produtos</h2>
 				<br><br>
+				<label>Busca por nome:</label>
+				<input type="text" maxlength="15" class="filtroTela">
+				<br/><br/>
 				<table>
 				<tr>
 				<th>Nome</th>
@@ -26,7 +29,7 @@
 				<c:forEach var="produtos" items="${produto}" varStatus="id">
 				
 				<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
-					<td>${produtos.nome}</td>
+					<td class="nome">${produtos.nome}</td>
 					<td>${produtos.compra}</td>
 					<td>${produtos.venda}</td>
 					<td onclick="prepara_edit_contato(${produtos.id}, 'CarregaAtualizaProduto')"><div title="Editar" class="Editar"></div></td>

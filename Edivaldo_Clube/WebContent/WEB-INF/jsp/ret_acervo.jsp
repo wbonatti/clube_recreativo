@@ -15,6 +15,9 @@
 			<section id="conteudo">
 				<h2>Consulta Acervo</h2>
 				<br><br>
+				<label>Busca por nome:</label>
+				<input type="text" maxlength="15" class="filtroTela">
+				<br/><br/>
 				<table>
 				<tr>
 				<th>Nome</th>
@@ -25,7 +28,7 @@
 				<c:forEach var="Acervos" items="${acervo}" varStatus="id">
 				
 				<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
-					<td>${Acervos.descricao}</td>
+					<td class="nome">${Acervos.descricao}</td>
 					<td>${Acervos.valor}</td>
 					<td onclick="prepara_edit_contato(${Acervos.id}, 'CarregaAtualizaAcervo')"><div title="Editar" class="Editar"></div></td>
 					<td onclick="prepara_rm_contato(${Acervos.id}, 'RemoveAcervo')"><div title="Excluir" class="Excluir"></div></td>

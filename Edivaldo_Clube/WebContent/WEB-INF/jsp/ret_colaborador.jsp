@@ -15,6 +15,9 @@
 			<section id="conteudo">
 				<h2>Consulta Colaborador</h2>
 				<br><br>
+				<label>Busca por nome:</label>
+				<input type="text" maxlength="15" class="filtroTela">
+				<br/><br/>
 				<table>
 				<tr>
 				<th>Nome</th>
@@ -26,7 +29,7 @@
 				<c:forEach var="colab" items="${colaborador}" varStatus="id">
 				
 				<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
-					<td>${colab.nome}</td>
+					<td class="nome">${colab.nome}</td>
 					<td>${colab.cpf}</td>
 					<td>${colab.fone}</td>
 					<td onclick="prepara_edit_contato(${colab.id}, 'CarregaAtualizaColaborador')"><div title="Editar" class="Editar"></div></td>

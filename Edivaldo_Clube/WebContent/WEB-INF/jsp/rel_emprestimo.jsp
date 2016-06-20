@@ -24,13 +24,13 @@
 				</tr>
 				<c:forEach var="empr" items="${Emprestimo}" varStatus="id">
 				
-				<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c'' }">
-					<td>${empr.nomeColaborador}</td>
-					<td>${empr.nomeSocio}</td>
-					<td><fmt:formatDate value="${empr.data.time}" pattern="dd/MM/yyyy"/></td>
-					<td><fmt:formatDate value="${empr.dataDevolucao.time}" pattern="dd/MM/yyyy"/></td>
-					<td>${empr.compraValorTotal}</td>
-				</tr>
+					<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
+						<td>${empr.nomeColaborador}</td>
+						<td>${empr.nomeSocio}</td>
+						<td><fmt:formatDate value="${empr.data.time}" pattern="dd/MM/yyyy"/></td>
+						<td><fmt:formatDate value="${empr.dataDevolucao.time}" pattern="dd/MM/yyyy"/></td>
+						<td>${empr.compraValorTotal}</td>
+					</tr>
 				</c:forEach>
 				</table>
 				<div id="resp_banco"></div>

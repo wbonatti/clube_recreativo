@@ -57,84 +57,6 @@ jQuery(document).ready(function() {
 		submitaForm();
 	}
 	
-	
-	$("#registrar_compra").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data:{ logica:"BuscaProdutoCompra"}
-		})
-		.done(function( msg ) {
-			$("article").html(msg);			
-		});
-	});
-	
-	$("#registrar_venda").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data:{ logica:"BuscaProdutoVenda"}
-		})
-		.done(function( msg ) {
-			$("article").html(msg);			
-		});
-	});
-	
-	$("#registrar_emprestimo").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data:{ logica:"BuscaProdutoEmprestimo"}
-		})
-		.done(function( msg ) {
-			$("article").html(msg);			
-		});
-	});
-	
-	$("#registrar_atendimento").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data:{ logica:"BuscaProdutoAtendimento"}
-		})
-		.done(function( msg ) {
-			$("article").html(msg);			
-		});
-	});
-	
-	$("#relatorio_compra").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data:{ logica:"BuscaCompra"}
-		})
-		.done(function( msg ) {
-			$("article").html(msg);			
-		});
-	});
-	
-	$("#relatorio_emprestimo").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data:{ logica:"BuscaEmprestimo"}
-		})
-		.done(function( msg ) {
-			$("article").html(msg);			
-		});
-	});
-	
-	$("#relatorio_atendimento").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data:{ logica:"BuscaAtendimento"}
-		})
-		.done(function( msg ) {
-			$("article").html(msg);			
-		});
-	});
-	
 	var limpar = function(){
 		$("form input").prop( "disabled", false );
 		$("select").prop("disabled", false);
@@ -202,235 +124,79 @@ jQuery(document).ready(function() {
 											Registrar
 --------------------------------------------------------------------------------------*/
 	
-	var carregaValor = function(){
-		var qual = $("tr").length-1;
-		var sobra = 0;
-		if($("h2").text()=="Realizar Venda"){
-			qual=qual-1;
-			for (var int = 1; int <= qual; int++) {
-				var val= $("#"+int+" ."+$("#"+int+" .prod option:selected").text()).text();
-				var qtd = $("#"+int+" .quantidade").val();
-				
-				sobra = sobra+(parseFloat(qtd)*parseFloat(val));
-			}
-			$("#total").val(corrige(String(sobra)));
-		}
-		else{
-			for (var int = 1; int <= qual; int++) {
-				var qt = $("#"+int+" .quantidade").val();
-				$("#"+int+" .quantidade").prop("disabled",true);
-				var val = valida($("#"+int+" .unidade").val());
-				sobra = sobra+(parseFloat(qt)*parseFloat(val));
-			}
-				$("#total").val(corrige(String(sobra)));
-			}
-	};
+$(".carregaValor").blur(function(){
+	var valor = 0.0;
 	
-$(".unidade").blur(carregaValor);
+	$("table tr:visible").each(function(){
+		var qtd = $(this).find(".quantidade").val().trim();
+		var val = $(this).find(".carregaValor").val().trim();
+		
+		valor += qtd*trocaPonto(val);
+	});
+	
+	$("#total").val(trocaPonto(valor));
+	
+});
 
-function valida(num){
-	var elo = "";
-	for (var int = 0; int < num.length; int++) {
-		if(num[int]==','){
-			elo=elo+'.';
-			continue;
+function trocaPonto(valor){
+	var localValue = valor.toString();
+	
+	if(localValue.indexOf(",") > 0){
+		return localValue.replace(',','.');
+	}else{
+		if(localValue.indexOf(".") < 0){
+			return acrescentaPontoZero(localValue);
 		}
-		elo=elo+num[int];
+		return localValue.replace('.',',');
 	}
-	return elo;
-};
+}
 
-function corrige(num){
-	var elo = "";
-	for (var int = 0; int < num.length; int++) {
-		if(num[int]=='.'){
-			elo=elo+',';
-			continue;
-		}
-		elo=elo+num[int];
-	}
-	return elo;
-};
+function acrescentaPontoZero(valor){
+	valor += ",00";
+	return valor;
+}
 
 $("#include").click(function(){
-	var qual = ($("tr").length)-1;
-	if($("h2").text()=="Realizar Venda"){
-		qual=qual-1;
-	}
-	if(qual<5){
-		if($("#"+qual+" .quantidade").val()!="" && $("#"+qual+" .unidade").val()!=""){
-			$("#principal-table tbody").append("<tr id="+(qual+1)+">"+$(".tr_include").html()+"</tr>");
-			if($("h2").text()=="Realizar Compra"||$("h2").text()=="Realizar Venda"){
-			$.getScript("JS/meu_script_js.js");
-		}}
+	var qtdHabilitada = $("table tr:visible").length;
+	
+	qtdHabilitada += 1;
+	
+	if(qtdHabilitada < 5){
+		$("table #"+qtdHabilitada).show();
 	}else{
 		$(this).hide();
 	}
 });
-
+ 
 $("#RegistraCompra").on("click",function(){
-	var contador = $("tr").length-1;
-	switch(contador){
-	case 1:
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraCompra", qtd: "1", fornecedor: $("#1 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: recebeValCampo("1 .unidade"), quantidade: recebeValCampo("1 .quantidade")}
-			});
-		break;
-	case 2: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraCompra", qtd: "2", fornecedor: $("#1 .forn option:selected").val(), fornecedor2: $("#2 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), produto2: $("#2 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: recebeValCampo("1 .unidade"), valorUnitario2: recebeValCampo("2 .unidade"), quantidade: recebeValCampo("1 .quantidade"), quantidade2: recebeValCampo("2 .quantidade")}
-			});
-		break;
-	case 3: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraCompra", qtd: "3", fornecedor: $("#1 .forn option:selected").val(), fornecedor2: $("#2 .forn option:selected").val(), fornecedor3: $("#3 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), produto2: $("#2 .prod option:selected").val(), produto3: $("#3 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: recebeValCampo("1 .unidade"), valorUnitario2: recebeValCampo("2 .unidade"), valorUnitario3: recebeValCampo("3 .unidade"), quantidade: recebeValCampo("1 .quantidade"), quantidade2: recebeValCampo("2 .quantidade"), quantidade3: recebeValCampo("3 .quantidade")}
-			});
-		break;
-	case 4: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraCompra", qtd: "4", fornecedor: $("#1 .forn option:selected").val(), fornecedor2: $("#2 .forn option:selected").val(), fornecedor3: $("#3 .forn option:selected").val(), fornecedor4: $("#4 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), produto2: $("#2 .prod option:selected").val(), produto3: $("#3 .prod option:selected").val(), produto4: $("#4 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: recebeValCampo("1 .unidade"), valorUnitario2: recebeValCampo("2 .unidade"), valorUnitario3: recebeValCampo("3 .unidade"), valorUnitario4: recebeValCampo("4 .unidade"), quantidade: recebeValCampo("1 .quantidade"), quantidade2: recebeValCampo("2 .quantidade"), quantidade3: recebeValCampo("3 .quantidade"), quantidade4: recebeValCampo("4 .quantidade")}
-			});
-		break;
-	case 5: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraCompra", qtd: "5", fornecedor: $("#1 .forn option:selected").val(), fornecedor2: $("#2 .forn option:selected").val(), fornecedor3: $("#3 .forn option:selected").val(), fornecedor4: $("#4 .forn option:selected").val(), fornecedor5: $("#5 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), produto2: $("#2 .prod option:selected").val(), produto3: $("#3 .prod option:selected").val(), produto4: $("#4 .prod option:selected").val(), produto5: $("#5 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: recebeValCampo("1 .unidade"), valorUnitario2: recebeValCampo("2 .unidade"), valorUnitario3: recebeValCampo("3 .unidade"), valorUnitario4: recebeValCampo("4 .unidade"), valorUnitario5: recebeValCampo("5 .unidade"), quantidade: recebeValCampo("1 .quantidade"), quantidade2: recebeValCampo("2 .quantidade"), quantidade3: recebeValCampo("3 .quantidade"),quantidade4: recebeValCampo("4 .quantidade"),quantidade5: recebeValCampo("5 .quantidade")}
-			});
-		break;
-	}
+	submitaForm();
 });
 
 $("#RegistraEmprestimo").on("click",function(){
-	var contador = $("tr").length-1;
-	switch(contador){
-	case 1:
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraEmprestimo", qtd: "1", colaborador: $("#1 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(),  acervo: $("#1 .acervo option:selected").val(), valorUnitario: $("#1 ."+$("#1 .acervo option:selected").text()).text()}
-			});
-		break;
-	case 2: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraEmprestimo", qtd: "2", colaborador: $("#1 .colaborador option:selected").val(), colaborador2: $("#2 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(), socio2: $("#2 .socio option:selected").val(),  acervo: $("#1 .acervo option:selected").val(), acervo2: $("#2 .acervo option:selected").val(), valorUnitario: $("#1 ."+$("#1 .acervo option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .acervo option:selected").text()).text()}
-			});
-		break;
-	case 3: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraEmprestimo", qtd: "3", colaborador: $("#1 .colaborador option:selected").val(), colaborador2: $("#2 .colaborador option:selected").val(), colaborador3: $("#3 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(), socio2: $("#2 .socio option:selected").val(), socio3: $("#3 .socio option:selected").val(),  acervo: $("#1 .acervo option:selected").val(), acervo2: $("#2 .acervo option:selected").val(), acervo3: $("#3 .acervo option:selected").val(), valorUnitario: $("#1 ."+$("#1 .acervo option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .acervo option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .acervo option:selected").text()).text()}
-			});
-		break;
-	case 4: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraEmprestimo", qtd: "4", colaborador: $("#1 .colaborador option:selected").val(), colaborador2: $("#2 .colaborador option:selected").val(), colaborador3: $("#3 .colaborador option:selected").val(), colaborador4: $("#4 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(), socio2: $("#2 .socio option:selected").val(), socio3: $("#3 .socio option:selected").val(), socio4: $("#4 .socio option:selected").val(),  acervo: $("#1 .acervo option:selected").val(), acervo2: $("#2 .acervo option:selected").val(), acervo3: $("#3 .acervo option:selected").val(), acervo4: $("#4 .acervo option:selected").val(), valorUnitario: $("#1 ."+$("#1 .acervo option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .acervo option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .acervo option:selected").text()).text(), valorUnitario4: $("#4 ."+$("#4 .acervo option:selected").text()).text()}
-			});
-		break;
-	case 5: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraEmprestimo", qtd: "5", colaborador: $("#1 .colaborador option:selected").val(), colaborador2: $("#2 .colaborador option:selected").val(), colaborador3: $("#3 .colaborador option:selected").val(), colaborador4: $("#4 .colaborador option:selected").val(), colaborador5: $("#5 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(), socio2: $("#2 .socio option:selected").val(), socio3: $("#3 .socio option:selected").val(), socio4: $("#4 .socio option:selected").val(), socio5: $("#5 .socio option:selected").val(),  acervo: $("#1 .acervo option:selected").val(), acervo2: $("#2 .acervo option:selected").val(), acervo3: $("#3 .acervo option:selected").val(), acervo4: $("#4 .acervo option:selected").val(), acervo5: $("#5 .acervo option:selected").val(), valorUnitario: $("#1 ."+$("#1 .acervo option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .acervo option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .acervo option:selected").text()).text(), valorUnitario4: $("#4 ."+$("#4 .acervo option:selected").text()).text(), valorUnitario5: $("#5 ."+$("#5 .acervo option:selected").text()).text()}
-			});
-		break;
-	}
+	submitaForm();
 });
 
 $("#RegistraAtendimento").on("click",function(){
-	var contador = $("tr").length-1;
-	switch(contador){
-	case 1:
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraAtendimento", qtd: "1", colaborador: $("#1 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(),  servico: $("#1 .servico option:selected").val(), valorUnitario: $("#1 ."+$("#1 .servico option:selected").text()).text()}
-			});
-		break;
-	case 2: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraAtendimento", qtd: "2", colaborador: $("#1 .colaborador option:selected").val(), colaborador2: $("#2 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(), socio2: $("#2 .socio option:selected").val(),  servico: $("#1 .servico option:selected").val(), servico2: $("#2 .servico option:selected").val(), valorUnitario: $("#1 ."+$("#1 .servico option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .servico option:selected").text()).text()}
-			});
-		break;
-	case 3: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraAtendimento", qtd: "3", colaborador: $("#1 .colaborador option:selected").val(), colaborador2: $("#2 .colaborador option:selected").val(), colaborador3: $("#3 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(), socio2: $("#2 .socio option:selected").val(), socio3: $("#3 .socio option:selected").val(),  servico: $("#1 .servico option:selected").val(), servico2: $("#2 .servico option:selected").val(), servico3: $("#3 .servico option:selected").val(), valorUnitario: $("#1 ."+$("#1 .servico option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .servico option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .servico option:selected").text()).text()}
-			});
-		break;
-	case 4: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraAtendimento", qtd: "4", colaborador: $("#1 .colaborador option:selected").val(), colaborador2: $("#2 .colaborador option:selected").val(), colaborador3: $("#3 .colaborador option:selected").val(), colaborador4: $("#4 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(), socio2: $("#2 .socio option:selected").val(), socio3: $("#3 .socio option:selected").val(), socio4: $("#4 .socio option:selected").val(),  servico: $("#1 .servico option:selected").val(), servico2: $("#2 .servico option:selected").val(), servico3: $("#3 .servico option:selected").val(), servico4: $("#4 .servico option:selected").val(), valorUnitario: $("#1 ."+$("#1 .servico option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .servico option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .servico option:selected").text()).text(), valorUnitario4: $("#4 ."+$("#4 .servico option:selected").text()).text()}
-			});
-		break;
-	case 5: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraAtendimento", qtd: "5", colaborador: $("#1 .colaborador option:selected").val(), colaborador2: $("#2 .colaborador option:selected").val(), colaborador3: $("#3 .colaborador option:selected").val(), colaborador4: $("#4 .colaborador option:selected").val(), colaborador5: $("#5 .colaborador option:selected").val(), socio: $("#1 .socio option:selected").val(), socio2: $("#2 .socio option:selected").val(), socio3: $("#3 .socio option:selected").val(), socio4: $("#4 .socio option:selected").val(), socio5: $("#5 .socio option:selected").val(),  servico: $("#1 .servico option:selected").val(), servico2: $("#2 .servico option:selected").val(), servico3: $("#3 .servico option:selected").val(), servico4: $("#4 .servico option:selected").val(), servico5: $("#5 .servico option:selected").val(), valorUnitario: $("#1 ."+$("#1 .servico option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .servico option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .servico option:selected").text()).text(), valorUnitario4: $("#4 ."+$("#4 .servico option:selected").text()).text(), valorUnitario5: $("#5 ."+$("#5 .servico option:selected").text()).text()}
-			});
-		break;
-	}
+	submitaForm();
 });
 
-$("#RegistraVenda").on("click",function(){
-	var contador = $("tr").length-1;
-	switch(contador){
-	case 1:
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraVenda", qtd: "1", colaborador: $("#1 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: $("#1 ."+$("#1 .prod option:selected").text()).text(), quantidade: recebeValCampo("1 .quantidade"), socio: $(".socio option:selected").val()}
-			});
-		break;
-	case 2: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraVenda", qtd: "2", colaborador: $("#1 .forn option:selected").val(), colaborador2: $("#2 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), produto2: $("#2 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: $("#1 ."+$("#1 .prod option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .prod option:selected").text()).text(), quantidade: recebeValCampo("1 .quantidade"), quantidade2: recebeValCampo("2 .quantidade"), socio: $(".socio option:selected").val()}
-			});
-		break;
-	case 3: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraVenda", qtd: "3", colaborador: $("#1 .forn option:selected").val(), colaborador2: $("#2 .forn option:selected").val(), colaborador3: $("#3 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), produto2: $("#2 .prod option:selected").val(), produto3: $("#3 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: $("#1 ."+$("#1 .prod option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .prod option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .prod option:selected").text()).text(), quantidade: recebeValCampo("1 .quantidade"), quantidade2: recebeValCampo("2 .quantidade"), quantidade3: recebeValCampo("3 .quantidade"), socio: $(".socio option:selected").val()}
-			});
-		break;
-	case 4: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraVenda", qtd: "4", colaborador: $("#1 .forn option:selected").val(), colaborador2: $("#2 .forn option:selected").val(), colaborador3: $("#3 .forn option:selected").val(), colaborador4: $("#4 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), produto2: $("#2 .prod option:selected").val(), produto3: $("#3 .prod option:selected").val(), produto4: $("#4 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: $("#1 ."+$("#1 .prod option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .prod option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .prod option:selected").text()).text(), valorUnitario4: $("#4 ."+$("#4 .prod option:selected").text()).text(), quantidade: recebeValCampo("1 .quantidade"), quantidade2: recebeValCampo("2 .quantidade"), quantidade3: recebeValCampo("3 .quantidade"), quantidade4: recebeValCampo("4 .quantidade"), socio: $(".socio option:selected").val()}
-			});
-		break;
-	case 5: 
-		$.ajax({
-			type: "POST",
-			url: "mvc",
-			data: { logica: "RegistraVenda", qtd: "5", colaborador: $("#1 .forn option:selected").val(), colaborador2: $("#2 .forn option:selected").val(), colaborador3: $("#3 .forn option:selected").val(), colaborador4: $("#4 .forn option:selected").val(), colaborador5: $("#5 .forn option:selected").val(), produto: $("#1 .prod option:selected").val(), produto2: $("#2 .prod option:selected").val(), produto3: $("#3 .prod option:selected").val(), produto4: $("#4 .prod option:selected").val(), produto5: $("#5 .prod option:selected").val(), valorTotal: recebeValCampo("total"), valorUnitario: $("#1 ."+$("#1 .prod option:selected").text()).text(), valorUnitario2: $("#2 ."+$("#2 .prod option:selected").text()).text(), valorUnitario3: $("#3 ."+$("#3 .prod option:selected").text()).text(), valorUnitario4: $("#4 ."+$("#4 .prod option:selected").text()).text(), valorUnitario5: $("#5 ."+$("#5 .prod option:selected").text()).text(), quantidade: recebeValCampo("1 .quantidade"), quantidade2: recebeValCampo("2 .quantidade"), quantidade3: recebeValCampo("3 .quantidade"), quantidade4: recebeValCampo("4 .quantidade"), quantidade5: recebeValCampo("5 .quantidade"), socio: $(".socio option:selected").val()}
-			});
-		break;
+$(".filtroTela").keyup(function(){
+	var campoBsuca = $(this).val();
+	
+	if(campoBsuca != ''){
+		$("table tr").each(function(i){
+			if(i != 0){
+				if($(this).find(".nome").text().indexOf(campoBsuca) < 0){
+					$(this).hide();
+				}
+			}
+		});
+	}else{
+		$("table tr").each(function(i){
+			$(this).show();
+		});
 	}
+	
 });
-
 
 });

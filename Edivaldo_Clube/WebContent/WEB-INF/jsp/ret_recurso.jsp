@@ -15,6 +15,9 @@
 			<section id="conteudo">
 				<h2>Consulta Recursos</h2>
 				<br><br>
+				<label>Busca por nome:</label>
+				<input type="text" maxlength="15" class="filtroTela">
+				<br/><br/>
 				<table>
 				<tr>
 				<th>Nome</th>
@@ -25,7 +28,7 @@
 				<c:forEach var="Recursos" items="${recurso}" varStatus="id">
 				
 				<tr bgcolor="#${id.count %2!=0? 'bfbfbf':'8c8c8c' }">
-					<td>${Recursos.nome}</td>
+					<td class="nome">${Recursos.nome}</td>
 					<td>${Recursos.valor}</td>
 					<td onclick="prepara_edit_contato(${Recursos.id}, 'CarregaAtualizaRecurso')"><div title="Editar" class="Editar"></div></td>
 					<td onclick="prepara_rm_contato(${Recursos.id}, 'RemoveRecurso')"><div title="Excluir" class="Excluir"></div></td>
